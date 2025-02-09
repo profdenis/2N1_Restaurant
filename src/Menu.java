@@ -19,6 +19,7 @@ public class Menu {
 
         while (!done) {
             if (afficherMenu("principal")) {
+                System.out.print("Option : ");
                 String option = scanner.nextLine();
                 done = gererOptionMenuPrincipal(option);
             } else {
@@ -62,7 +63,7 @@ public class Menu {
     }
 
     private static void chargerPlats() {
-        System.out.println("Nom du fichier (par défaut : plat2.json) : ");
+        System.out.print("Nom du fichier (par défaut : plat2.json) : ");
         String nomFichier = scanner.nextLine();
         if (nomFichier.trim().isEmpty()) {
             nomFichier = "plats2.json";
@@ -91,7 +92,7 @@ public class Menu {
     }
 
     private static void sauvegarderPlats() {
-        System.out.println("Nom du fichier : ");
+        System.out.print("Nom du fichier : ");
         String nomFichier = scanner.nextLine();
         try {
             gestionnairePlats.sauvegarder(nomFichier);
@@ -110,6 +111,7 @@ public class Menu {
                 System.out.println(commande);
             }
             if (afficherMenu("nouvelleCommande")) {
+                System.out.print("Option : ");
                 String option = scanner.nextLine();
                 done = gererOptionMenuNouvelleCommande(option, commande);
             } else {
@@ -145,6 +147,7 @@ public class Menu {
 
         while (!done) {
             if (afficherMenu("rechercherPlat")) {
+                System.out.print("Option : ");
                 String option = scanner.nextLine();
                 done = gererOptionMenuRechercherPlat(option);
             } else {
@@ -154,7 +157,7 @@ public class Menu {
     }
 
     private static void ajouterPlatCommande(Commande commande) {
-        System.out.println("Index du plat à ajouter : ");
+        System.out.print("Index du plat à ajouter : ");
         try {
             int index = scanner.nextInt();
             commande.ajouterPlat(gestionnairePlats.getPlat(index));
@@ -188,7 +191,7 @@ public class Menu {
     }
 
     private static void rechercherParNom() {
-        System.out.println("Chaîne à rechercher : ");
+        System.out.print("Chaîne à rechercher : ");
 
         String critere = scanner.nextLine();
         Map<Integer, Plat> resultats = gestionnairePlats.rechercherParNom(critere);
@@ -197,7 +200,7 @@ public class Menu {
 
     private static void rechercherParPrix() {
         System.out.println("Entrer < ou > comme premier caractère, suivi du prix.");
-        System.out.println("Prix à rechercher : ");
+        System.out.print("Prix à rechercher : ");
         String critere = scanner.nextLine();
 
         char operateur = critere.charAt(0);
@@ -228,7 +231,6 @@ public class Menu {
             }
             i++;
         }
-        sb.append("\n");
         System.out.println(sb);
     }
 }
