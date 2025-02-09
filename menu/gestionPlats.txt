@@ -1,0 +1,7 @@
+
+Choisissez une option :
+1. Charger une liste de plats
+2. Ajouter un plat
+3. Afficher tous les plats
+4. Enregistrer la liste de plats
+5. Retour

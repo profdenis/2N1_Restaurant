@@ -1,59 +1,35 @@
 import restaurant.Commande;
-import restaurant.GestionnairePlats;
 import restaurant.Plat;
-import restaurant.Restaurant;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.Map;
+import java.util.Scanner;
 
-public class Menu {
+public class MenuCommandes {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final GestionnairePlats gestionnairePlats = new GestionnairePlats();
-    private static final Restaurant restaurant = new Restaurant("McDrummond");
 
-    public static void main(String[] args) {
+    public static void menuGestionCommandes() {
         boolean done = false;
 
         while (!done) {
-            if (afficherMenu("principal")) {
+            if (MenuPrincipal.afficherMenu("gestionCommandes")) {
                 System.out.print("Option : ");
                 String option = scanner.nextLine();
-                done = gererOptionMenuPrincipal(option);
+                done = gererOptionMenuGestionCommandes(option);
             } else {
                 done = true;
             }
         }
     }
 
-    private static final Map<String, String> menuStrings = new HashMap<>();
-
-    private static boolean afficherMenu(String name) {
-        if (!menuStrings.containsKey(name)) {
-            try {
-                String menuPath = "menu/" + name + ".txt";
-                byte[] menuBytes = Files.readAllBytes(Paths.get(menuPath));
-                menuStrings.put(name, new String(menuBytes));
-            } catch (IOException e) {
-                System.err.println("Error reading menu content: " + e.getMessage());
-                return false;
-            }
-        }
-        System.out.println(menuStrings.get(name));
-        return true;
-    }
-
-    private static boolean gererOptionMenuPrincipal(String option) {
+    private static boolean gererOptionMenuGestionCommandes(String option) {
         switch (option) {
-            case "1" -> chargerPlats();
-            case "2" -> ajouterPlatGestionnairePlats();
-            case "3" -> System.out.println(gestionnairePlats);
-            case "4" -> sauvegarderPlats();
-            case "5" -> nouvelleCommande();
-            case "6" -> afficherCommandes();
-            case "7" -> {
+            case "1" -> chargerCommandes();
+            case "2" -> menuNouvelleCommande();
+            case "3" -> afficherCommandes();
+            case "4" -> sauvegarderCommandes();
+            case "5" -> {
                 System.out.println("Vous voulez quitter !");
                 return true;
             }
@@ -62,46 +38,12 @@ public class Menu {
         return false;
     }
 
-    private static void chargerPlats() {
-        System.out.print("Nom du fichier (par défaut : plat2.json) : ");
-        String nomFichier = scanner.nextLine();
-        if (nomFichier.trim().isEmpty()) {
-            nomFichier = "plats2.json";
-        }
-        try {
-            gestionnairePlats.charger(nomFichier);
-        } catch (IOException e) {
-            System.out.println("impossible de charger le fichier : " + e.getMessage());
-        }
+
+    private static void chargerCommandes() {
+
     }
 
-    private static void ajouterPlatGestionnairePlats() {
-        System.out.println("Ajouter un plat");
-        System.out.print("Nom du plat : ");
-        String nom = scanner.nextLine();
-        System.out.print("Prix du plat : ");
-        try {
-            double prix = scanner.nextDouble();
-            gestionnairePlats.ajouterPlat(new Plat(nom, prix));
-        } catch(InputMismatchException e) {
-            System.out.println("Impossible d'ajouter un plat, prix invalide");
-        }
-        finally {
-            scanner.nextLine();
-        }
-    }
-
-    private static void sauvegarderPlats() {
-        System.out.print("Nom du fichier : ");
-        String nomFichier = scanner.nextLine();
-        try {
-            gestionnairePlats.sauvegarder(nomFichier);
-        } catch (IOException e) {
-            System.out.println("impossible de sauvegarder le fichier : " + e.getMessage());
-        }
-    }
-
-    private static void nouvelleCommande() {
+    private static void menuNouvelleCommande() {
         boolean done = false;
         Commande commande = new Commande();
 
@@ -110,7 +52,7 @@ public class Menu {
                 System.out.println("\nNouvelle commande");
                 System.out.println(commande);
             }
-            if (afficherMenu("nouvelleCommande")) {
+            if (MenuPrincipal.afficherMenu("nouvelleCommande")) {
                 System.out.print("Option : ");
                 String option = scanner.nextLine();
                 done = gererOptionMenuNouvelleCommande(option, commande);
@@ -121,13 +63,17 @@ public class Menu {
     }
 
     private static void afficherCommandes() {
-        System.out.println(restaurant);
+        System.out.println(MenuPrincipal.restaurant);
+    }
+
+    private static void sauvegarderCommandes() {
+
     }
 
     private static boolean gererOptionMenuNouvelleCommande(String option, Commande commande) {
         switch (option) {
-            case "1" -> System.out.println(gestionnairePlats);
-            case "2" -> rechercherPlat();
+            case "1" -> System.out.println(MenuPrincipal.gestionnairePlats);
+            case "2" -> menuRechercherPlat();
             case "3" -> ajouterPlatCommande(commande);
             case "4" -> {
                 completerCommande(commande);
@@ -142,11 +88,11 @@ public class Menu {
         return false;
     }
 
-    private static void rechercherPlat() {
+    private static void menuRechercherPlat() {
         boolean done = false;
 
         while (!done) {
-            if (afficherMenu("rechercherPlat")) {
+            if (MenuPrincipal.afficherMenu("rechercherPlat")) {
                 System.out.print("Option : ");
                 String option = scanner.nextLine();
                 done = gererOptionMenuRechercherPlat(option);
@@ -160,7 +106,7 @@ public class Menu {
         System.out.print("Index du plat à ajouter : ");
         try {
             int index = scanner.nextInt();
-            commande.ajouterPlat(gestionnairePlats.getPlat(index));
+            commande.ajouterPlat(MenuPrincipal.gestionnairePlats.getPlat(index));
         } catch (InputMismatchException | IndexOutOfBoundsException e) {
             System.out.println("Index invalide, impossible d'ajouter le plat !");
         } finally {
@@ -172,7 +118,7 @@ public class Menu {
         if (commande.estVide()) {
             System.out.println("Commande vide, impossible de compléter");
         } else {
-            restaurant.ajouterCommande(commande);
+            MenuPrincipal.restaurant.ajouterCommande(commande);
             System.out.println("Commande complétée");
             System.out.println(commande);
         }
@@ -194,7 +140,7 @@ public class Menu {
         System.out.print("Chaîne à rechercher : ");
 
         String critere = scanner.nextLine();
-        Map<Integer, Plat> resultats = gestionnairePlats.rechercherParNom(critere);
+        Map<Integer, Plat> resultats = MenuPrincipal.gestionnairePlats.rechercherParNom(critere);
         afficherResultatsRecherche(resultats);
     }
 
@@ -211,7 +157,7 @@ public class Menu {
 
         try {
             double prix = Double.parseDouble(critere.substring(1));
-            Map<Integer, Plat> resultats = gestionnairePlats.rechercherParPrix(prix, operateur == '<');
+            Map<Integer, Plat> resultats = MenuPrincipal.gestionnairePlats.rechercherParPrix(prix, operateur == '<');
             afficherResultatsRecherche(resultats);
         } catch (NumberFormatException e) {
             System.out.println("Prix invalide !");

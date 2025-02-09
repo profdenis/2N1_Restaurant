@@ -1,9 +1,5 @@
 
 Choisissez une option :
-1. Charger une liste de plats
-2. Ajouter un plat
-3. Afficher tous les plats
-4. Enregistrer la liste de plats
-5. Nouvelle commande
-6. Afficher les commandes
-7. Quitter
+1. Gestion des plats
+2. Gestion des commandes
+3. Quitter

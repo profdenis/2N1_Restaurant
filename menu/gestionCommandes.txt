@@ -1,0 +1,7 @@
+
+Choisissez une option :
+1. Charger les commandes d'un restaurant
+2. Nouvelle commande
+3. Afficher toutes les commandes
+4. Enregistrer les commandes du restaurant
+5. Retour

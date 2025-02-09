@@ -26,6 +26,9 @@ public class Restaurant {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Commandes du restaurant ").append(nom).append(":\n");
+        if (commandes.isEmpty()) {
+            builder.append("  Liste de commandes du restaurant vide\n");
+        }
         for (int i = 0; i < commandes.size(); i++) {
             builder.append("\nCommande #");
             builder.append(i+1);
