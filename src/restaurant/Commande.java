@@ -21,9 +21,12 @@ public class Commande {
     }
 
     public double calculerTotal() {
-        return plats.stream()
-                .mapToDouble(Plat::getPrix)
-                .sum();
+        double sum = 0.0;
+        for (Plat plat : plats) {
+            double prix = plat.getPrix();
+            sum += prix;
+        }
+        return sum;
     }
 
     public void payer() {
@@ -38,7 +41,9 @@ public class Commande {
             builder.append("non ");
         }
         builder.append("payée\n");
-        plats.forEach(builder::append);
+        for (Plat plat : plats) {
+            builder.append(plat);
+        }
         builder.append(String.format("Total : %.2f$\n", calculerTotal()));
         return builder.toString();
     }
