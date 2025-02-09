@@ -17,6 +17,10 @@ public class Restaurant {
         commandes.add(commande);
         return commande;
     }
+    public void ajouterCommande(Commande commande) {
+        commandes.add(commande);
+    }
+
 
     @Override
     public String toString() {

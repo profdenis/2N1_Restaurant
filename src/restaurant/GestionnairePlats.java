@@ -21,10 +21,7 @@ public class GestionnairePlats {
     }
 
     public Plat getPlat(int index) {
-        if (index >= 0 && index < plats.size()) {
             return plats.get(index);
-        }
-        return null;
     }
 
     public void charger(String nomFichier) throws IOException {

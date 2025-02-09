@@ -33,6 +33,10 @@ public class Commande {
         estPayee = true;
     }
 
+    public boolean estVide() {
+        return plats.isEmpty();
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

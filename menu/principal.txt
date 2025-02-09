@@ -1,0 +1,6 @@
+Choisissez une option :
+1. Charger une liste de plats
+2. Enregistrer la liste de plats
+3. Nouvelle commande
+4. Afficher les commandes
+5. Quitter

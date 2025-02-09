@@ -1,0 +1,50 @@
+[
+  {
+    "nom": "Pâtes Carbonara",
+    "prix": 12.50
+  },
+  {
+    "nom": "Salade verte",
+    "prix": 8.00
+  },
+  {
+    "nom": "Bœuf Bourguignon",
+    "prix": 15.00
+  },
+  {
+    "nom": "Tournedos Rossini",
+    "prix": 25.00
+  },
+  {
+    "nom": "Ratatouille",
+    "prix": 10.50
+  },
+  {
+    "nom": "Magret de canard",
+    "prix": 18.00
+  },
+  {
+    "nom": "Quiche Lorraine",
+    "prix": 11.00
+  },
+  {
+    "nom": "Cassoulet",
+    "prix": 16.50
+  },
+  {
+    "nom": "Tarte Provençale",
+    "prix": 9.50
+  },
+  {
+    "nom": "Coq au Vin",
+    "prix": 14.00
+  },
+  {
+    "nom": "Sole Meunière",
+    "prix": 22.00
+  },
+  {
+    "nom": "Canard à L'Orange",
+    "prix": 19.50
+  }
+]
