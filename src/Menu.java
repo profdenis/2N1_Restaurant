@@ -47,10 +47,12 @@ public class Menu {
     private static boolean gererOptionMenuPrincipal(String option) {
         switch (option) {
             case "1" -> chargerPlats();
-            case "2" -> sauvegarderPlats();
-            case "3" -> nouvelleCommande();
-            case "4" -> afficherCommandes();
-            case "5" -> {
+            case "2" -> ajouterPlatGestionnairePlats();
+            case "3" -> System.out.println(gestionnairePlats);
+            case "4" -> sauvegarderPlats();
+            case "5" -> nouvelleCommande();
+            case "6" -> afficherCommandes();
+            case "7" -> {
                 System.out.println("Vous voulez quitter !");
                 return true;
             }
@@ -69,6 +71,22 @@ public class Menu {
             gestionnairePlats.charger(nomFichier);
         } catch (IOException e) {
             System.out.println("impossible de charger le fichier : " + e.getMessage());
+        }
+    }
+
+    private static void ajouterPlatGestionnairePlats() {
+        System.out.println("Ajouter un plat");
+        System.out.print("Nom du plat : ");
+        String nom = scanner.nextLine();
+        System.out.print("Prix du plat : ");
+        try {
+            double prix = scanner.nextDouble();
+            gestionnairePlats.ajouterPlat(new Plat(nom, prix));
+        } catch(InputMismatchException e) {
+            System.out.println("Impossible d'ajouter un plat, prix invalide");
+        }
+        finally {
+            scanner.nextLine();
         }
     }
 
@@ -108,7 +126,7 @@ public class Menu {
         switch (option) {
             case "1" -> System.out.println(gestionnairePlats);
             case "2" -> rechercherPlat();
-            case "3" -> ajouterPlat(commande);
+            case "3" -> ajouterPlatCommande(commande);
             case "4" -> {
                 completerCommande(commande);
                 return true;
@@ -135,7 +153,7 @@ public class Menu {
         }
     }
 
-    private static void ajouterPlat(Commande commande) {
+    private static void ajouterPlatCommande(Commande commande) {
         System.out.println("Index du plat à ajouter : ");
         try {
             int index = scanner.nextInt();
