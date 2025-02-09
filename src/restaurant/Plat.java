@@ -19,6 +19,6 @@ public class Plat {
 
     @Override
     public String toString() {
-        return String.format("- %s : %.2f$\n", getNom(), getPrix());
+        return String.format("- %s : %.2f$", getNom(), getPrix());
     }
 }

@@ -43,6 +43,7 @@ public class Commande {
         builder.append("payée\n");
         for (Plat plat : plats) {
             builder.append(plat);
+            builder.append("\n");
         }
         builder.append(String.format("Total : %.2f$\n", calculerTotal()));
         return builder.toString();
