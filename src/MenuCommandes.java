@@ -1,6 +1,7 @@
 import restaurant.Commande;
 import restaurant.Plat;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
@@ -38,9 +39,17 @@ public class MenuCommandes {
         return false;
     }
 
-
     private static void chargerCommandes() {
-
+        System.out.print("Nom du fichier (par défaut : commandes.json) : ");
+        String nomFichier = scanner.nextLine();
+        if (nomFichier.trim().isEmpty()) {
+            nomFichier = "commandes.json";
+        }
+        try {
+            MenuPrincipal.gestionnaireCommandes.charger(nomFichier);
+        } catch (IOException e) {
+            System.out.println("impossible de charger le fichier : " + e.getMessage());
+        }
     }
 
     private static void menuNouvelleCommande() {
@@ -63,11 +72,17 @@ public class MenuCommandes {
     }
 
     private static void afficherCommandes() {
-        System.out.println(MenuPrincipal.restaurant);
+        System.out.print(MenuPrincipal.restaurant);
     }
 
     private static void sauvegarderCommandes() {
-
+        System.out.print("Nom du fichier : ");
+        String nomFichier = scanner.nextLine();
+        try {
+            MenuPrincipal.gestionnaireCommandes.sauvegarder(nomFichier);
+        } catch (IOException e) {
+            System.out.println("impossible de sauvegarder le fichier : " + e.getMessage());
+        }
     }
 
     private static boolean gererOptionMenuNouvelleCommande(String option, Commande commande) {

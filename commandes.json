@@ -1,0 +1,32 @@
+[
+  {
+    "plats": [
+      {
+        "nom": "Tournedos Rossini",
+        "prix": 25.0
+      },
+      {
+        "nom": "Magret de canard",
+        "prix": 18.0
+      },
+      {
+        "nom": "Bœuf Bourguignon",
+        "prix": 15.0
+      }
+    ],
+    "estPayee": false
+  },
+  {
+    "plats": [
+      {
+        "nom": "Cassoulet",
+        "prix": 16.5
+      },
+      {
+        "nom": "Coq au Vin",
+        "prix": 14.0
+      }
+    ],
+    "estPayee": false
+  }
+]

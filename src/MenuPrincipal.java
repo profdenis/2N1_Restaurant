@@ -1,3 +1,4 @@
+import restaurant.GestionnaireCommandes;
 import restaurant.GestionnairePlats;
 import restaurant.Restaurant;
 
@@ -11,6 +12,7 @@ public class MenuPrincipal {
     private static final Scanner scanner = new Scanner(System.in);
     static final GestionnairePlats gestionnairePlats = new GestionnairePlats();
     static final Restaurant restaurant = new Restaurant("McDrummond");
+        static final GestionnaireCommandes gestionnaireCommandes = new GestionnaireCommandes(restaurant);
 
     public static void main(String[] args) {
         boolean done = false;

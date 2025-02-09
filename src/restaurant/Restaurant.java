@@ -12,6 +12,22 @@ public class Restaurant {
         this.commandes = new ArrayList<>();
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public List<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(List<Commande> commandes) {
+        this.commandes = commandes;
+    }
+
     public Commande nouvelleCommande() {
         Commande commande = new Commande();
         commandes.add(commande);

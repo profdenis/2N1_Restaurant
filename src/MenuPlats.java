@@ -39,7 +39,7 @@ public class MenuPlats {
     }
 
     private static void chargerPlats() {
-        System.out.print("Nom du fichier (par défaut : plat2.json) : ");
+        System.out.print("Nom du fichier (par défaut : plats2.json) : ");
         String nomFichier = scanner.nextLine();
         if (nomFichier.trim().isEmpty()) {
             nomFichier = "plats2.json";

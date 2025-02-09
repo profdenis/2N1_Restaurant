@@ -45,9 +45,9 @@ public class Commande {
             builder.append("non ");
         }
         builder.append("payée\n");
+
         for (Plat plat : plats) {
-            builder.append(plat);
-            builder.append("\n");
+            builder.append("  ").append(plat).append("\n");
         }
         builder.append(String.format("Total : %.2f$\n", calculerTotal()));
         return builder.toString();
