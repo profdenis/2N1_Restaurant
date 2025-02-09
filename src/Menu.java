@@ -1,14 +1,12 @@
 import restaurant.Commande;
 import restaurant.GestionnairePlats;
+import restaurant.Plat;
 import restaurant.Restaurant;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
 
@@ -109,18 +107,32 @@ public class Menu {
     private static boolean gererOptionMenuNouvelleCommande(String option, Commande commande) {
         switch (option) {
             case "1" -> System.out.println(gestionnairePlats);
-            case "2" -> ajouterPlat(commande);
-            case "3" -> {
+            case "2" -> rechercherPlat();
+            case "3" -> ajouterPlat(commande);
+            case "4" -> {
                 completerCommande(commande);
                 return true;
             }
-            case "4" -> {
+            case "5" -> {
                 System.out.println("Commande annulée");
                 return true;
             }
             default -> System.out.println("Option invalide. SVP choisir une option valide.");
         }
         return false;
+    }
+
+    private static void rechercherPlat() {
+        boolean done = false;
+
+        while (!done) {
+            if (afficherMenu("rechercherPlat")) {
+                String option = scanner.nextLine();
+                done = gererOptionMenuRechercherPlat(option);
+            } else {
+                done = true;
+            }
+        }
     }
 
     private static void ajouterPlat(Commande commande) {
@@ -145,5 +157,60 @@ public class Menu {
         }
     }
 
+    private static boolean gererOptionMenuRechercherPlat(String option) {
+        switch (option) {
+            case "1" -> rechercherParNom();
+            case "2" -> rechercherParPrix();
+            case "3" -> {
+                return true;
+            }
+            default -> System.out.println("Option invalide. SVP choisir une option valide.");
+        }
+        return false;
+    }
 
+    private static void rechercherParNom() {
+        System.out.println("Chaîne à rechercher : ");
+
+        String critere = scanner.nextLine();
+        Map<Integer, Plat> resultats = gestionnairePlats.rechercherParNom(critere);
+        afficherResultatsRecherche(resultats);
+    }
+
+    private static void rechercherParPrix() {
+        System.out.println("Entrer < ou > comme premier caractère, suivi du prix.");
+        System.out.println("Prix à rechercher : ");
+        String critere = scanner.nextLine();
+
+        char operateur = critere.charAt(0);
+        if (operateur != '<' && operateur != '>') {
+            System.out.println("Opérateur invalide. SVP entrer < ou > comme opérateur.");
+            return;
+        }
+
+        try {
+            double prix = Double.parseDouble(critere.substring(1));
+            Map<Integer, Plat> resultats = gestionnairePlats.rechercherParPrix(prix, operateur == '<');
+            afficherResultatsRecherche(resultats);
+        } catch (NumberFormatException e) {
+            System.out.println("Prix invalide !");
+        }
+    }
+
+    private static void afficherResultatsRecherche(Map<Integer, Plat> resultats) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nombre de plats = ").append(resultats.size()).append(",\n");
+        sb.append("plats = \n");
+
+        int i = 1;
+        for (Integer index_plats : resultats.keySet()) {
+            sb.append("  ").append(index_plats).append(": ").append(resultats.get(index_plats));
+            if (i < resultats.size()) {
+                sb.append(",\n");
+            }
+            i++;
+        }
+        sb.append("\n");
+        System.out.println(sb);
+    }
 }

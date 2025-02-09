@@ -1,5 +1,6 @@
 Choisissez une option :
 1. Afficher tous les plats
-2. Ajouter un plat
-3. Compléter la commande
-4. Annuler la commande
+2. Rechercher un plat
+3. Ajouter un plat
+4. Compléter la commande
+5. Annuler la commande

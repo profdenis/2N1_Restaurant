@@ -1,0 +1,4 @@
+Choisissez une option :
+1. Rechercher par nom
+2. Rechercher par prix
+3. Retour

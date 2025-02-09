@@ -4,8 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GestionnairePlats {
     private List<Plat> plats;
@@ -40,35 +39,37 @@ public class GestionnairePlats {
         plats.add(plat);
     }
 
-    public List<Plat> rechercherParNom(String nom) {
-        List<Plat> list = new ArrayList<>();
-        for (Plat plat : plats) {
+    public Map<Integer, Plat> rechercherParNom(String nom) {
+        Map<Integer, Plat> resultats = new TreeMap<>();
+        for (int i = 0; i < plats.size(); i++) {
+            Plat plat = plats.get(i);
             if (plat.getNom().toLowerCase()
                     .contains(nom.toLowerCase())) {
-                list.add(plat);
+                resultats.put(i, plat);
             }
         }
-        return list;
+        return resultats;
     }
 
-    public List<Plat> rechercherParPrix(double prix, boolean inferieur) {
-        List<Plat> list = new ArrayList<>();
-        for (Plat plat : plats) {
+    public Map<Integer, Plat> rechercherParPrix(double prix, boolean inferieur) {
+        Map<Integer, Plat> resultats = new TreeMap<>();
+        for (int i = 0; i < plats.size(); i++) {
+            Plat plat = plats.get(i);
             if (inferieur ?
                     plat.getPrix() < prix :
                     plat.getPrix() > prix) {
-                list.add(plat);
+                resultats.put(i, plat);
             }
         }
-        return list;
+        return resultats;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("GestionnairePlats [");
-        sb.append("nombre de plats = ").append(plats.size()).append(",\n");
-        sb.append("plats = [\n");
+//        sb.append("GestionnairePlats\n");
+        sb.append("Nombre de plats = ").append(plats.size()).append(",\n");
+        sb.append("plats = \n");
 
         for (int i = 0; i < plats.size(); i++) {
             sb.append("  ").append(i).append(": ").append(plats.get(i));
@@ -77,7 +78,7 @@ public class GestionnairePlats {
             }
         }
 
-        sb.append("\n]]");
+        sb.append("\n");
         return sb.toString();
     }
 }
